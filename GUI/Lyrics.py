@@ -29,7 +29,8 @@ class Window(QtWidgets.QWidget):
 
         self.imgSwitch = 1
         self.colSwitch = 0
-        self.fontSize = 12
+        self.fontSize = 11
+        self.padding = 0
         self.colArray = ['Black','Green','Yellow','Orange','Red','Pink','Purple','Blue','Black']
         self.pic = QtWidgets.QLabel(self)
         self.pic.setGeometry(00,00,500,300)
@@ -47,6 +48,10 @@ class Window(QtWidgets.QWidget):
         #color change button
         self.myButton5 = QtWidgets.QPushButton('Green')
         self.myButton6 = QtWidgets.QPushButton('Font Size')
+        self.myButton7 = QtWidgets.QPushButton('Text Right')
+
+        #self.slider = QtWidgets.QSlider()
+        #self.slider.setOrientation(Horizontal)
 
 
         h_box = QtWidgets.QHBoxLayout()
@@ -57,12 +62,14 @@ class Window(QtWidgets.QWidget):
         h_box.addWidget(self.myButton4)
         h_box.addWidget(self.myButton5)
         h_box.addWidget(self.myButton6)
+        h_box.addWidget(self.myButton7)
         
         #h_box.addStretch()
 
         v_box = QtWidgets.QVBoxLayout()
         v_box.addWidget(self.myLabel)
         v_box.addWidget(self.myLabel2)
+        #v_box.addWidget(self.slider)
         v_box.addLayout(h_box)
         
 
@@ -81,6 +88,7 @@ class Window(QtWidgets.QWidget):
         # create connection between signal (click) and slot (stuff in parens)
         self.myButton5.clicked.connect(self.btn_click5)
         self.myButton6.clicked.connect(self.btn_click6)
+        self.myButton7.clicked.connect(self.btn_click7)
 
         self.setWindowTitle('Dynamic Lyrics')    
         self.show()
@@ -107,12 +115,21 @@ class Window(QtWidgets.QWidget):
         self.colSwitch += 1
         if(self.colSwitch == 8):
             self.colSwitch = 0
-        self.myLabel.setStyleSheet("color:" + self.colArray[self.colSwitch])
+        self.myLabel.setStyleSheet("color:" + self.colArray[self.colSwitch] + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
         self.myButton5.setText(self.colArray[self.colSwitch+1])
 
     def btn_click6(self):
         self.fontSize += 2
-        self.myLabel.setStyleSheet("font-size: " + str(self.fontSize) + "pt")
+        if(self.fontSize > 30):
+            self.fontSize = 11
+        self.myLabel.setStyleSheet("color:" + self.colArray[self.colSwitch] + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
+
+    def btn_click7(self):
+        self.padding += 4
+        if(self.padding > 20):
+            self.padding = 0
+        self.myLabel.setStyleSheet("color:" + self.colArray[self.colSwitch] + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
+
 
 # create application loop
 app = QtWidgets.QApplication(sys.argv)

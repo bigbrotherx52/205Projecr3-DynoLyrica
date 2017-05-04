@@ -9,6 +9,7 @@ with open ("MGMT - Kids.lrc", "r") as file:
     data=file.readlines()
 
 
+
 # inherit from QWidget class
 # QWidget class is the base class of all user interface objects
 class Window(QtWidgets.QWidget):
@@ -19,6 +20,8 @@ class Window(QtWidgets.QWidget):
         self.init_ui()
 
     def init_ui(self):
+
+        self.timesClicked = 0
         self.myButton = QtWidgets.QPushButton('Next')
         self.myButton2 = QtWidgets.QPushButton('Before')
         
@@ -48,21 +51,33 @@ class Window(QtWidgets.QWidget):
         # create connection between signal (click) and slot (stuff in parens)
         self.myButton2.clicked.connect(self.btn_click2)
 
+        timesClicked = 0
+
         self.setWindowTitle('Clicky')    
         self.show()
 
 
     def btn_search(self):
         
-        quary = self.searchBox.text()
+        self.quary = self.searchBox.text()
+        a = argparser[:]
 
-        #build the parser
-        argparser.add_argument("--q", default = quary)
-        argparser.add_argument("--max-results", help="Max results", default=10)
-        argparser.add_argument("--closedCaption", help = "closed caption", default = "true")
-        args = argparser.parse_args()
-
+        if(self.timesClicked == 0):
+            #build the parser
+            argparser.add_argument("--q", help = "text", default = self.searchBox.text())
+            argparser.add_argument("--max-results", help="Max results", default=10)
+            argparser.add_argument("--closedCaption", help = "closed caption", default = "true")
+            args = argparser.parse_args()
+        if(self.timesClicked > 0):
+            args = a.parse_args()
+            a.add_argument("--q", help = "text", default = self.searchBox.text())
+            a.add_argument("--max-results", help="Max results", default=10)
+            a.add_argument("--closedCaption", help = "closed caption", default = "true")
+            args = a.parse_args()
+        self.timesClicked += 1
+        print(self.searchBox.text())
         #try and get results
+        result = ''
         try:
             result = searcher(args)
         except HttpError:
@@ -75,11 +90,14 @@ class Window(QtWidgets.QWidget):
         formattedList = ""
         #number of items returned
         print(result.__len__())
+        print(result)
         for item in result:
             #print("results added: " + item)
             formattedList += "\n" + item
         
         self.myLabel.setText(formattedList)
+        self.args = argparser
+
         
     def btn_click(self):
         self.counter += 1
