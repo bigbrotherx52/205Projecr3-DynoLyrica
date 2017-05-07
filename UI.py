@@ -60,7 +60,7 @@ class Window(QtWidgets.QWidget):
     def btn_search(self):
         
         self.quary = self.searchBox.text()
-        a = argparser[:]
+        #a = argparser[:]
 
         if(self.timesClicked == 0):
             #build the parser
@@ -69,11 +69,10 @@ class Window(QtWidgets.QWidget):
             argparser.add_argument("--closedCaption", help = "closed caption", default = "true")
             args = argparser.parse_args()
         if(self.timesClicked > 0):
-            args = a.parse_args()
-            a.add_argument("--q", help = "text", default = self.searchBox.text())
-            a.add_argument("--max-results", help="Max results", default=10)
-            a.add_argument("--closedCaption", help = "closed caption", default = "true")
-            args = a.parse_args()
+            #argparser.add_argument("--q", help = "text", default = self.searchBox.text())
+            #argparser.add_argument("--max-results", help="Max results", default=10)
+            #argparser.add_argument("--closedCaption", help = "closed caption", default = "true")
+            args = argparser.parse_args()
         self.timesClicked += 1
         print(self.searchBox.text())
         #try and get results

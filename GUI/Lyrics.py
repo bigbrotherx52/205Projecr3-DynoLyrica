@@ -1,7 +1,7 @@
 import os,sys
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
-from PyQt5 import QtCore 
+from PyQt5 import QtCore
 
 with open ("MGMT - Kids.lrc", "r") as file:
     data=file.readlines()
@@ -50,8 +50,8 @@ class Window(QtWidgets.QWidget):
         self.myButton6 = QtWidgets.QPushButton('Font Size')
         self.myButton7 = QtWidgets.QPushButton('Text Right')
 
-        #self.slider = QtWidgets.QSlider()
-        #self.slider.setOrientation(Horizontal)
+        self.slider = QtWidgets.QSlider()
+        self.slider.setOrientation(QtCore.Qt.Horizontal)
 
 
         h_box = QtWidgets.QHBoxLayout()
@@ -69,7 +69,7 @@ class Window(QtWidgets.QWidget):
         v_box = QtWidgets.QVBoxLayout()
         v_box.addWidget(self.myLabel)
         v_box.addWidget(self.myLabel2)
-        #v_box.addWidget(self.slider)
+        v_box.addWidget(self.slider)
         v_box.addLayout(h_box)
         
 
