@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from apiclient.discovery import build
+from oauth2client.tools import argparser
 #from apiclient.errors import HttpError
 #from oauth2client.tools import argparser
 
@@ -13,25 +14,24 @@ DEVELOPER_KEY = "AIzaSyDWH0e3ZQs8bBAYrVleXJsSUhDxMS7EXC0"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
-def youtube_search(options):
+def youtube_search(quary):
     youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,
     developerKey=DEVELOPER_KEY)
 
     # Call the search.list method to retrieve results matching the specified
     # query term.
+    
+    argparser.add_argument("--q", default = quary)
+    argparser.add_argument("--max-results", help="Max results", default=10)
+    argparser.add_argument("--closedCaption", help = "closed caption", default = "true")
+    args = argparser.parse_args()
+    
     search_response = youtube.search().list(
-        q=options.q,
+        q=args.q,
         part="id,snippet",
-        maxResults=options.max_results
+        maxResults=args.max_results
         ).execute()
 
-    #videoID = search_response.get("items")
-    #captions = youtube.caption().list(
-    #    part ="snippet",
-    #    id = videoID
-    #    ).execute()
-    
-    #print (captions)
     
     
     videos = []
@@ -60,7 +60,7 @@ def youtube_search(options):
     #print "Playlists:\n", "\n".join(playlists), "\n"
     
     #print("results found: " + x)
-    return videos
+    return search_response
 
 #if __name__ == "__main__":
 #
