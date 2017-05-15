@@ -103,14 +103,17 @@ class Window(QtWidgets.QWidget):
         self.myButton10 = QtWidgets.QPushButton('Song \n Downloader')
         self.myButton11 = QtWidgets.QPushButton('Play')
 
+        #Slider stuff
         self.slider = QtWidgets.QSlider()
         self.slider.setOrientation(QtCore.Qt.Horizontal)
+        self.slider.valueChanged.connect(self.valuec)
+
 
 
         h_box = QtWidgets.QHBoxLayout()
         h_box.addStretch()
-        h_box.addWidget(self.myButton)
-        h_box.addWidget(self.myButton2)
+        #h_box.addWidget(self.myButton)		#before
+        #h_box.addWidget(self.myButton2)	#next
         h_box.addWidget(self.myButton3)
         h_box.addWidget(self.myButton4)
         h_box.addWidget(self.myButton5)
@@ -145,7 +148,8 @@ class Window(QtWidgets.QWidget):
         self.myButton6.clicked.connect(self.btn_click6)
         self.myButton7.clicked.connect(self.btn_click7)
         self.myButton10.clicked.connect(self.btn_click10)
-        self.myButton11.clicked.connect(self.btn_click11)
+        self.myButton11.clicked.connect(self.btn_click11)	#VLC
+
         
         self.dialogTextBrowser = Window2(self)
 
@@ -195,7 +199,18 @@ class Window(QtWidgets.QWidget):
 
     def btn_click11(self):
         self.p = vlc.MediaPlayer("music")
+        self.p.stop()
         self.p.play()
+        self.slider.setSliderPosition(0)
+
+    def valuec(self):
+        self.slider.setMaximum(len(lyrics)-1)
+        size = self.slider.value()
+        #print(self.slider.sliderPosition())
+        self.myLabel.setText(lyrics[size])
+        self.myLabel2.setText(timeStamp[size])  #timestamp
+
+
 
 
 # create application loop

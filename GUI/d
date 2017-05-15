@@ -1,0 +1,2107 @@
+Help on module vlc:
+
+NNAAMMEE
+    vlc
+
+DDEESSCCRRIIPPTTIIOONN
+    This module provides bindings for the LibVLC public API, see
+    U{http://wiki.videolan.org/LibVLC}.
+    
+    You can find the documentation and a README file with some examples
+    at U{http://www.advene.org/download/python-ctypes/}.
+    
+    Basically, the most important class is L{Instance}, which is used
+    to create a libvlc instance.  From this instance, you then create
+    L{MediaPlayer} and L{MediaListPlayer} instances.
+    
+    Alternatively, you may create instances of the L{MediaPlayer} and
+    L{MediaListPlayer} class directly and an instance of L{Instance}
+    will be implicitly created.  The latter can be obtained using the
+    C{get_instance} method of L{MediaPlayer} and L{MediaListPlayer}.
+
+CCLLAASSSSEESS
+    _ctypes.Structure(_ctypes._CData)
+        FILE
+        Log
+    _ctypes.Union(_ctypes._CData)
+        EventUnion
+        MediaTrackTracks
+    _ctypes._Pointer(_ctypes._CData)
+        LP_FILE
+        LP_Log
+    builtins.Exception(builtins.BaseException)
+        VLCException
+    builtins.object
+        CallbackDecorators
+        ListPOINTER
+        Position
+        memoize_parameterless
+    ctypes.c_void_p(_ctypes._SimpleCData)
+        AudioCleanupCb
+        AudioDrainCb
+        AudioFlushCb
+        AudioPauseCb
+        AudioPlayCb
+        AudioResumeCb
+        AudioSetVolumeCb
+        AudioSetupCb
+        Callback
+        LogCb
+        MediaCloseCb
+        MediaOpenCb
+        MediaReadCb
+        MediaSeekCb
+        VideoCleanupCb
+        VideoDisplayCb
+        VideoFormatCb
+        VideoLockCb
+        VideoUnlockCb
+    _Cstruct(_ctypes.Structure)
+        AudioOutput
+        AudioOutputDevice
+        AudioTrack
+        ChapterDescription
+        Event
+        LogMessage
+        MediaEvent
+        MediaStats
+        MediaTrack
+        MediaTrackInfo
+        ModuleDescription
+        PlaylistItem
+        Rectangle
+        SubtitleTrack
+        TitleDescription
+        TrackDescription
+        VideoTrack
+    _Ctype(builtins.object)
+        EventManager
+        Instance
+        Media
+        MediaDiscoverer
+        MediaLibrary
+        MediaList
+        MediaListPlayer
+        MediaPlayer
+    _Enum(ctypes.c_uint)
+        AudioOutputChannel
+        AudioOutputDeviceTypes
+        EventType
+        LogLevel
+        MediaParseFlag
+        MediaType
+        Meta
+        NavigateMode
+        PlaybackMode
+        State
+        TrackType
+        VideoAdjustOption
+        VideoLogoOption
+        VideoMarqueeOption
+    
+    class AAuuddiiooCClleeaannuuppCCbb(ctypes.c_void_p)
+     |  Callback prototype for audio playback cleanup.
+     |  This is called when the media player no longer needs an audio output.
+     |  \param opaque data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |  
+     |  Method resolution order:
+     |      AudioCleanupCb
+     |      ctypes.c_void_p
+     |      _ctypes._SimpleCData
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Methods inherited from ctypes.c_void_p:
+     |  
+     |  ffrroomm__ppaarraamm(...) from _ctypes.PyCSimpleType
+     |      Convert a Python object into a function call parameter.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from ctypes.c_void_p:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._SimpleCData:
+     |  
+     |  ____bbooooll____(self, /)
+     |      self != 0
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCSimpleType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _ctypes._SimpleCData:
+     |  
+     |  vvaalluuee
+     |      current value
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class AAuuddiiooDDrraaiinnCCbb(ctypes.c_void_p)
+     |  Callback prototype for audio buffer drain
+     |  (i.e. wait for pending buffers to be played).
+     |  \param data data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |  
+     |  Method resolution order:
+     |      AudioDrainCb
+     |      ctypes.c_void_p
+     |      _ctypes._SimpleCData
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Methods inherited from ctypes.c_void_p:
+     |  
+     |  ffrroomm__ppaarraamm(...) from _ctypes.PyCSimpleType
+     |      Convert a Python object into a function call parameter.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from ctypes.c_void_p:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._SimpleCData:
+     |  
+     |  ____bbooooll____(self, /)
+     |      self != 0
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCSimpleType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _ctypes._SimpleCData:
+     |  
+     |  vvaalluuee
+     |      current value
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class AAuuddiiooFFlluusshhCCbb(ctypes.c_void_p)
+     |  Callback prototype for audio buffer flush
+     |  (i.e. discard all pending buffers and stop playback as soon as possible).
+     |  \param data data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |  
+     |  Method resolution order:
+     |      AudioFlushCb
+     |      ctypes.c_void_p
+     |      _ctypes._SimpleCData
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Methods inherited from ctypes.c_void_p:
+     |  
+     |  ffrroomm__ppaarraamm(...) from _ctypes.PyCSimpleType
+     |      Convert a Python object into a function call parameter.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from ctypes.c_void_p:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._SimpleCData:
+     |  
+     |  ____bbooooll____(self, /)
+     |      self != 0
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCSimpleType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _ctypes._SimpleCData:
+     |  
+     |  vvaalluuee
+     |      current value
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class AAuuddiiooOOuuttppuutt(_Cstruct)
+     |  (INTERNAL) Base class for ctypes structures.
+     |  
+     |  Method resolution order:
+     |      AudioOutput
+     |      _Cstruct
+     |      _ctypes.Structure
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  ____ssttrr____(self)
+     |      Return str(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  ddeessccrriippttiioonn
+     |      Structure/Union member
+     |  
+     |  nnaammee
+     |      Structure/Union member
+     |  
+     |  nneexxtt
+     |      Structure/Union member
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _Cstruct:
+     |  
+     |  ____rreepprr____(self)
+     |      Return repr(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _Cstruct:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes.Structure:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCStructType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class AAuuddiiooOOuuttppuuttCChhaannnneell(_Enum)
+     |  Audio channels.
+     |  
+     |  Method resolution order:
+     |      AudioOutputChannel
+     |      _Enum
+     |      ctypes.c_uint
+     |      _ctypes._SimpleCData
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  DDoollbbyyss = vlc.AudioOutputChannel.Dolbys
+     |  
+     |  EErrrroorr = vlc.AudioOutputChannel.FIXME_(4294967295)
+     |  
+     |  LLeefftt = vlc.AudioOutputChannel.Left
+     |  
+     |  RRSStteerreeoo = vlc.AudioOutputChannel.RStereo
+     |  
+     |  RRiigghhtt = vlc.AudioOutputChannel.Right
+     |  
+     |  SStteerreeoo = vlc.AudioOutputChannel.Stereo
+     |  
+     |  ____ccttyyppee__bbee____ = <class 'vlc.AudioOutputChannel'>
+     |      Audio channels.
+     |  
+     |  ____ccttyyppee__llee____ = <class 'vlc.AudioOutputChannel'>
+     |      Audio channels.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _Enum:
+     |  
+     |  ____eeqq____(self, other)
+     |      Return self==value.
+     |  
+     |  ____hhaasshh____(self)
+     |      Return hash(self).
+     |  
+     |  ____nnee____(self, other)
+     |      Return self!=value.
+     |  
+     |  ____rreepprr____(self)
+     |      Return repr(self).
+     |  
+     |  ____ssttrr____(self)
+     |      Return str(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from ctypes.c_uint:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._SimpleCData:
+     |  
+     |  ____bbooooll____(self, /)
+     |      self != 0
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCSimpleType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _ctypes._SimpleCData:
+     |  
+     |  vvaalluuee
+     |      current value
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class AAuuddiiooOOuuttppuuttDDeevviiccee(_Cstruct)
+     |  (INTERNAL) Base class for ctypes structures.
+     |  
+     |  Method resolution order:
+     |      AudioOutputDevice
+     |      _Cstruct
+     |      _ctypes.Structure
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  ____ssttrr____(self)
+     |      Return str(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  ddeessccrriippttiioonn
+     |      Structure/Union member
+     |  
+     |  ddeevviiccee
+     |      Structure/Union member
+     |  
+     |  nneexxtt
+     |      Structure/Union member
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _Cstruct:
+     |  
+     |  ____rreepprr____(self)
+     |      Return repr(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _Cstruct:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes.Structure:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCStructType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class AAuuddiiooOOuuttppuuttDDeevviicceeTTyyppeess(_Enum)
+     |  Audio device types.
+     |  
+     |  Method resolution order:
+     |      AudioOutputDeviceTypes
+     |      _Enum
+     |      ctypes.c_uint
+     |      _ctypes._SimpleCData
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  EErrrroorr = vlc.AudioOutputDeviceTypes.FIXME_(4294967295)
+     |  
+     |  MMoonnoo = vlc.AudioOutputDeviceTypes.Mono
+     |  
+     |  SSPPDDIIFF = vlc.AudioOutputDeviceTypes.SPDIF
+     |  
+     |  SStteerreeoo = vlc.AudioOutputDeviceTypes.Stereo
+     |  
+     |  ____ccttyyppee__bbee____ = <class 'vlc.AudioOutputDeviceTypes'>
+     |      Audio device types.
+     |  
+     |  ____ccttyyppee__llee____ = <class 'vlc.AudioOutputDeviceTypes'>
+     |      Audio device types.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _Enum:
+     |  
+     |  ____eeqq____(self, other)
+     |      Return self==value.
+     |  
+     |  ____hhaasshh____(self)
+     |      Return hash(self).
+     |  
+     |  ____nnee____(self, other)
+     |      Return self!=value.
+     |  
+     |  ____rreepprr____(self)
+     |      Return repr(self).
+     |  
+     |  ____ssttrr____(self)
+     |      Return str(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from ctypes.c_uint:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._SimpleCData:
+     |  
+     |  ____bbooooll____(self, /)
+     |      self != 0
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCSimpleType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _ctypes._SimpleCData:
+     |  
+     |  vvaalluuee
+     |      current value
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class AAuuddiiooPPaauusseeCCbb(ctypes.c_void_p)
+     |  Callback prototype for audio pause.
+     |  
+     |  ote The pause callback is never called if the audio is already paused.
+     |  \param data data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |  \param pts time stamp of the pause request (should be elapsed already)
+     |  
+     |  Method resolution order:
+     |      AudioPauseCb
+     |      ctypes.c_void_p
+     |      _ctypes._SimpleCData
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Methods inherited from ctypes.c_void_p:
+     |  
+     |  ffrroomm__ppaarraamm(...) from _ctypes.PyCSimpleType
+     |      Convert a Python object into a function call parameter.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from ctypes.c_void_p:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._SimpleCData:
+     |  
+     |  ____bbooooll____(self, /)
+     |      self != 0
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCSimpleType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _ctypes._SimpleCData:
+     |  
+     |  vvaalluuee
+     |      current value
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class AAuuddiiooPPllaayyCCbb(ctypes.c_void_p)
+     |  Callback prototype for audio playback.
+     |  \param data data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |  \param samples pointer to the first audio sample to play back [IN]
+     |  \param count number of audio samples to play back
+     |  \param pts expected play time stamp (see libvlc_delay())
+     |  
+     |  Method resolution order:
+     |      AudioPlayCb
+     |      ctypes.c_void_p
+     |      _ctypes._SimpleCData
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Methods inherited from ctypes.c_void_p:
+     |  
+     |  ffrroomm__ppaarraamm(...) from _ctypes.PyCSimpleType
+     |      Convert a Python object into a function call parameter.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from ctypes.c_void_p:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._SimpleCData:
+     |  
+     |  ____bbooooll____(self, /)
+     |      self != 0
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCSimpleType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _ctypes._SimpleCData:
+     |  
+     |  vvaalluuee
+     |      current value
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class AAuuddiiooRReessuummeeCCbb(ctypes.c_void_p)
+     |  Callback prototype for audio resumption (i.e. restart from pause).
+     |  
+     |  ote The resume callback is never called if the audio is not paused.
+     |  \param data data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |  \param pts time stamp of the resumption request (should be elapsed already)
+     |  
+     |  Method resolution order:
+     |      AudioResumeCb
+     |      ctypes.c_void_p
+     |      _ctypes._SimpleCData
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Methods inherited from ctypes.c_void_p:
+     |  
+     |  ffrroomm__ppaarraamm(...) from _ctypes.PyCSimpleType
+     |      Convert a Python object into a function call parameter.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from ctypes.c_void_p:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._SimpleCData:
+     |  
+     |  ____bbooooll____(self, /)
+     |      self != 0
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCSimpleType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _ctypes._SimpleCData:
+     |  
+     |  vvaalluuee
+     |      current value
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class AAuuddiiooSSeettVVoolluummeeCCbb(ctypes.c_void_p)
+     |  Callback prototype for audio volume change.
+     |  \param data data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |  \param volume software volume (1. = nominal, 0. = mute)
+     |  \param mute muted flag
+     |  
+     |  Method resolution order:
+     |      AudioSetVolumeCb
+     |      ctypes.c_void_p
+     |      _ctypes._SimpleCData
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Methods inherited from ctypes.c_void_p:
+     |  
+     |  ffrroomm__ppaarraamm(...) from _ctypes.PyCSimpleType
+     |      Convert a Python object into a function call parameter.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from ctypes.c_void_p:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._SimpleCData:
+     |  
+     |  ____bbooooll____(self, /)
+     |      self != 0
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCSimpleType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _ctypes._SimpleCData:
+     |  
+     |  vvaalluuee
+     |      current value
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class AAuuddiiooSSeettuuppCCbb(ctypes.c_void_p)
+     |  Callback prototype to setup the audio playback.
+     |  This is called when the media player needs to create a new audio output.
+     |  \param opaque pointer to the data pointer passed to
+     |                L{libvlc_audio_set_callbacks}() [IN/OUT]
+     |  \param format 4 bytes sample format [IN/OUT]
+     |  \param rate sample rate [IN/OUT]
+     |  \param channels channels count [IN/OUT]
+     |  eturn 0 on success, anything else to skip audio playback
+     |  
+     |  Method resolution order:
+     |      AudioSetupCb
+     |      ctypes.c_void_p
+     |      _ctypes._SimpleCData
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Methods inherited from ctypes.c_void_p:
+     |  
+     |  ffrroomm__ppaarraamm(...) from _ctypes.PyCSimpleType
+     |      Convert a Python object into a function call parameter.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from ctypes.c_void_p:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._SimpleCData:
+     |  
+     |  ____bbooooll____(self, /)
+     |      self != 0
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCSimpleType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _ctypes._SimpleCData:
+     |  
+     |  vvaalluuee
+     |      current value
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class AAuuddiiooTTrraacckk(_Cstruct)
+     |  (INTERNAL) Base class for ctypes structures.
+     |  
+     |  Method resolution order:
+     |      AudioTrack
+     |      _Cstruct
+     |      _ctypes.Structure
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  cchhaannnneellss
+     |      Structure/Union member
+     |  
+     |  rraattee
+     |      Structure/Union member
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _Cstruct:
+     |  
+     |  ____rreepprr____(self)
+     |      Return repr(self).
+     |  
+     |  ____ssttrr____(self)
+     |      Return str(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _Cstruct:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes.Structure:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCStructType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class CCaallllbbaacckk(ctypes.c_void_p)
+     |  Callback function notification
+     |  \param p_event the event triggering the callback
+     |  
+     |  Method resolution order:
+     |      Callback
+     |      ctypes.c_void_p
+     |      _ctypes._SimpleCData
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Methods inherited from ctypes.c_void_p:
+     |  
+     |  ffrroomm__ppaarraamm(...) from _ctypes.PyCSimpleType
+     |      Convert a Python object into a function call parameter.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from ctypes.c_void_p:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._SimpleCData:
+     |  
+     |  ____bbooooll____(self, /)
+     |      self != 0
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCSimpleType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _ctypes._SimpleCData:
+     |  
+     |  vvaalluuee
+     |      current value
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class CCaallllbbaacckkDDeeccoorraattoorrss(builtins.object)
+     |  Class holding various method decorators for callback functions.
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  AAuuddiiooCClleeaannuuppCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype for audio playback cleanup.
+     |      This is called when the media player no longer needs an audio output.
+     |      \param opaque data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |  
+     |  AAuuddiiooDDrraaiinnCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype for audio playback cleanup.
+     |      This is called when the media player no longer needs an audio output.
+     |      \param opaque data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |  
+     |  AAuuddiiooFFlluusshhCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype for audio buffer flush
+     |      (i.e. discard all pending buffers and stop playback as soon as possible).
+     |      \param data data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |  
+     |  AAuuddiiooPPaauusseeCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype for audio buffer flush
+     |      (i.e. discard all pending buffers and stop playback as soon as possible).
+     |      \param data data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |  
+     |  AAuuddiiooPPllaayyCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype for audio playback.
+     |      \param data data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |      \param samples pointer to the first audio sample to play back [IN]
+     |      \param count number of audio samples to play back
+     |      \param pts expected play time stamp (see libvlc_delay())
+     |  
+     |  AAuuddiiooRReessuummeeCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype for audio buffer flush
+     |      (i.e. discard all pending buffers and stop playback as soon as possible).
+     |      \param data data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |  
+     |  AAuuddiiooSSeettVVoolluummeeCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype for audio volume change.
+     |      \param data data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |      \param volume software volume (1. = nominal, 0. = mute)
+     |      \param mute muted flag
+     |  
+     |  AAuuddiiooSSeettuuppCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype to setup the audio playback.
+     |      This is called when the media player needs to create a new audio output.
+     |      \param opaque pointer to the data pointer passed to
+     |                    L{libvlc_audio_set_callbacks}() [IN/OUT]
+     |      \param format 4 bytes sample format [IN/OUT]
+     |      \param rate sample rate [IN/OUT]
+     |      \param channels channels count [IN/OUT]
+     |      eturn 0 on success, anything else to skip audio playback
+     |  
+     |  CCaallllbbaacckk = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype to display a picture.
+     |      When the video frame needs to be shown, as determined by the media playback
+     |      clock, the display callback is invoked.
+     |      \param opaque private pointer as passed to L{libvlc_video_set_callbacks}() [IN]
+     |      \param picture private pointer returned from the @ref libvlc_video_lock_cb
+     |                     callback [IN]
+     |  
+     |  LLooggCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype for LibVLC log message handler.
+     |      \param data data pointer as given to L{libvlc_log_set}()
+     |      \param level message level (@ref libvlc_log_level)
+     |      \param ctx message context (meta-information about the message)
+     |      \param fmt printf() format string (as defined by ISO C11)
+     |      \param args variable argument list for the format
+     |      
+     |      ote Log message handlers <b>must</b> be thread-safe.
+     |      \warning The message context pointer, the format string parameters and the
+     |               variable arguments are only valid until the callback returns.
+     |  
+     |  MMeeddiiaaCClloosseeCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype for audio playback cleanup.
+     |      This is called when the media player no longer needs an audio output.
+     |      \param opaque data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |  
+     |  MMeeddiiaaOOppeennCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype to open a custom bitstream input media.
+     |      The same media item can be opened multiple times. Each time, this callback
+     |      is invoked. It should allocate and initialize any instance-specific
+     |      resources, then store them in *datap. The instance resources can be freed
+     |      in the @ref libvlc_media_close_cb callback.
+     |      \param opaque private pointer as passed to L{libvlc_media_new_callbacks}()
+     |      \param datap storage space for a private data pointer [OUT]
+     |      \param sizep byte length of the bitstream or UINT64_MAX if unknown [OUT]
+     |      
+     |      ote For convenience, *datap is initially NULL and *sizep is initially 0.
+     |      eturn 0 on success, non-zero on error. In case of failure, the other
+     |      callbacks will not be invoked and any value stored in *datap and *sizep is
+     |      discarded.
+     |  
+     |  MMeeddiiaaRReeaaddCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype to read data from a custom bitstream input media.
+     |      \param opaque private pointer as set by the @ref libvlc_media_open_cb
+     |                    callback
+     |      \param buf start address of the buffer to read data into
+     |      \param len bytes length of the buffer
+     |      eturn strictly positive number of bytes read, 0 on end-of-stream,
+     |              or -1 on non-recoverable error
+     |      
+     |      ote If no data is immediately available, then the callback should sleep.
+     |      \warning The application is responsible for avoiding deadlock situations.
+     |      In particular, the callback should return an error if playback is stopped;
+     |      if it does not return, then L{libvlc_media_player_stop}() will never return.
+     |  
+     |  MMeeddiiaaSSeeeekkCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype to seek a custom bitstream input media.
+     |      \param opaque private pointer as set by the @ref libvlc_media_open_cb
+     |                    callback
+     |      \param offset absolute byte offset to seek to
+     |      eturn 0 on success, -1 on error.
+     |  
+     |  VViiddeeooCClleeaannuuppCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype for audio playback cleanup.
+     |      This is called when the media player no longer needs an audio output.
+     |      \param opaque data pointer as passed to L{libvlc_audio_set_callbacks}() [IN]
+     |  
+     |  VViiddeeooDDiissppllaayyCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype to display a picture.
+     |      When the video frame needs to be shown, as determined by the media playback
+     |      clock, the display callback is invoked.
+     |      \param opaque private pointer as passed to L{libvlc_video_set_callbacks}() [IN]
+     |      \param picture private pointer returned from the @ref libvlc_video_lock_cb
+     |                     callback [IN]
+     |  
+     |  VViiddeeooFFoorrmmaattCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype to configure picture buffers format.
+     |      This callback gets the format of the video as output by the video decoder
+     |      and the chain of video filters (if any). It can opt to change any parameter
+     |      as it needs. In that case, LibVLC will attempt to convert the video format
+     |      (rescaling and chroma conversion) but these operations can be CPU intensive.
+     |      \param opaque pointer to the private pointer passed to
+     |                    L{libvlc_video_set_callbacks}() [IN/OUT]
+     |      \param chroma pointer to the 4 bytes video format identifier [IN/OUT]
+     |      \param width pointer to the pixel width [IN/OUT]
+     |      \param height pointer to the pixel height [IN/OUT]
+     |      \param pitches table of scanline pitches in bytes for each pixel plane
+     |                     (the table is allocated by LibVLC) [OUT]
+     |      \param lines table of scanlines count for each plane [OUT]
+     |      eturn the number of picture buffers allocated, 0 indicates failure
+     |      
+     |      ote
+     |      For each pixels plane, the scanline pitch must be bigger than or equal to
+     |      the number of bytes per pixel multiplied by the pixel width.
+     |      Similarly, the number of scanlines must be bigger than of equal to
+     |      the pixel height.
+     |      Furthermore, we recommend that pitches and lines be multiple of 32
+     |      to not break assumptions that might be held by optimized code
+     |      in the video decoders, video filters and/or video converters.
+     |  
+     |  VViiddeeooLLoocckkCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype to allocate and lock a picture buffer.
+     |      Whenever a new video frame needs to be decoded, the lock callback is
+     |      invoked. Depending on the video chroma, one or three pixel planes of
+     |      adequate dimensions must be returned via the second parameter. Those
+     |      planes must be aligned on 32-bytes boundaries.
+     |      \param opaque private pointer as passed to L{libvlc_video_set_callbacks}() [IN]
+     |      \param planes start address of the pixel planes (LibVLC allocates the array
+     |                  of void pointers, this callback must initialize the array) [OUT]
+     |      eturn a private pointer for the display and unlock callbacks to identify
+     |              the picture buffers
+     |  
+     |  VViiddeeooUUnnlloocckkCCbb = <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+     |      Callback prototype to unlock a picture buffer.
+     |      When the video frame decoding is complete, the unlock callback is invoked.
+     |      This callback might not be needed at all. It is only an indication that the
+     |      application can now read the pixel values if it needs to.
+     |      \warning A picture buffer is unlocked after the picture is decoded,
+     |      but before the picture is displayed.
+     |      \param opaque private pointer as passed to L{libvlc_video_set_callbacks}() [IN]
+     |      \param picture private pointer returned from the @ref libvlc_video_lock_cb
+     |                     callback [IN]
+     |      \param planes pixel planes as defined by the @ref libvlc_video_lock_cb
+     |                    callback (this parameter is only for convenience) [IN]
+    
+    class CChhaapptteerrDDeessccrriippttiioonn(_Cstruct)
+     |  (INTERNAL) Base class for ctypes structures.
+     |  
+     |  Method resolution order:
+     |      ChapterDescription
+     |      _Cstruct
+     |      _ctypes.Structure
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  __ffiieellddss = [('time_offset', <class 'ctypes.c_long'>), ('duration', <cla...
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _Cstruct:
+     |  
+     |  ____rreepprr____(self)
+     |      Return repr(self).
+     |  
+     |  ____ssttrr____(self)
+     |      Return str(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _Cstruct:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from _Cstruct:
+     |  
+     |  __ffiieellddss__ = []
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes.Structure:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCStructType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _ctypes._CData:
+     |  
+     |  __bb__bbaassee__
+     |      the base object
+     |  
+     |  __bb__nneeeeddssffrreeee__
+     |      whether the object owns the memory or not
+     |  
+     |  __oobbjjeeccttss
+     |      internal objects tree (NEVER CHANGE THIS OBJECT!)
+    
+    class EEvveenntt(_Cstruct)
+     |  (INTERNAL) Base class for ctypes structures.
+     |  
+     |  Method resolution order:
+     |      Event
+     |      _Cstruct
+     |      _ctypes.Structure
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  oobbjjeecctt
+     |      Structure/Union member
+     |  
+     |  ttyyppee
+     |      Structure/Union member
+     |  
+     |  uu
+     |      Structure/Union member
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _Cstruct:
+     |  
+     |  ____rreepprr____(self)
+     |      Return repr(self).
+     |  
+     |  ____ssttrr____(self)
+     |      Return str(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _Cstruct:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes.Structure:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCStructType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class EEvveennttMMaannaaggeerr(_Ctype)
+     |  Create an event manager with callback handler.
+     |  
+     |  This class interposes the registration and handling of
+     |  event notifications in order to (a) remove the need for
+     |  decorating each callback functions with the decorator
+     |  '@callbackmethod', (b) allow any number of positional
+     |  and/or keyword arguments to the callback (in addition
+     |  to the Event instance) and (c) to preserve the Python
+     |  objects such that the callback and argument objects
+     |  remain alive (i.e. are not garbage collected) until
+     |  B{after} the notification has been unregistered.
+     |  
+     |  @note: Only a single notification can be registered
+     |  for each event type in an EventManager instance.
+     |  
+     |  Method resolution order:
+     |      EventManager
+     |      _Ctype
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  eevveenntt__aattttaacchh(self, eventtype, callback, *args, **kwds)
+     |      Register an event notification.
+     |      
+     |      @param eventtype: the desired event type to be notified about.
+     |      @param callback: the function to call when the event occurs.
+     |      @param args: optional positional arguments for the callback.
+     |      @param kwds: optional keyword arguments for the callback.
+     |      @return: 0 on success, ENOMEM on error.
+     |      
+     |      @note: The callback function must have at least one argument,
+     |      an Event instance.  Any other, optional positional and keyword
+     |      arguments are in B{addition} to the first one.
+     |  
+     |  eevveenntt__ddeettaacchh(self, eventtype)
+     |      Unregister an event notification.
+     |      
+     |      @param eventtype: the event type notification to be removed.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Static methods defined here:
+     |  
+     |  ____nneeww____(cls, ptr=<object object at 0x7f26d62d0110>)
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from _Ctype:
+     |  
+     |  ffrroomm__ppaarraamm(this)
+     |      (INTERNAL) ctypes parameter conversion method.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _Ctype:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+    
+    class EEvveennttTTyyppee(_Enum)
+     |  Event types.
+     |  
+     |  Method resolution order:
+     |      EventType
+     |      _Enum
+     |      ctypes.c_uint
+     |      _ctypes._SimpleCData
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  MMeeddiiaaDDiissccoovveerreerrEEnnddeedd = vlc.EventType.MediaDiscovererEnded
+     |  
+     |  MMeeddiiaaDDiissccoovveerreerrSSttaarrtteedd = vlc.EventType.MediaDiscovererStarted
+     |  
+     |  MMeeddiiaaDDuurraattiioonnCChhaannggeedd = vlc.EventType.MediaDurationChanged
+     |  
+     |  MMeeddiiaaFFrreeeedd = vlc.EventType.MediaFreed
+     |  
+     |  MMeeddiiaaLLiissttEEnnddRReeaacchheedd = vlc.EventType.MediaListEndReached
+     |  
+     |  MMeeddiiaaLLiissttIItteemmAAddddeedd = vlc.EventType.MediaListItemAdded
+     |  
+     |  MMeeddiiaaLLiissttIItteemmDDeelleetteedd = vlc.EventType.MediaListItemDeleted
+     |  
+     |  MMeeddiiaaLLiissttPPllaayyeerrNNeexxttIItteemmSSeett = vlc.EventType.MediaListPlayerNextItemSet
+     |  
+     |  MMeeddiiaaLLiissttPPllaayyeerrPPllaayyeedd = vlc.EventType.MediaListPlayerPlayed
+     |  
+     |  MMeeddiiaaLLiissttPPllaayyeerrSSttooppppeedd = vlc.EventType.MediaListPlayerStopped
+     |  
+     |  MMeeddiiaaLLiissttVViieewwIItteemmAAddddeedd = vlc.EventType.MediaListViewItemAdded
+     |  
+     |  MMeeddiiaaLLiissttVViieewwIItteemmDDeelleetteedd = vlc.EventType.MediaListViewItemDeleted
+     |  
+     |  MMeeddiiaaLLiissttVViieewwWWiillllAAddddIItteemm = vlc.EventType.MediaListViewWillAddItem
+     |  
+     |  MMeeddiiaaLLiissttVViieewwWWiillllDDeelleetteeIItteemm = vlc.EventType.MediaListViewWillDeleteIte...
+     |  
+     |  MMeeddiiaaLLiissttWWiillllAAddddIItteemm = vlc.EventType.MediaListWillAddItem
+     |  
+     |  MMeeddiiaaLLiissttWWiillllDDeelleetteeIItteemm = vlc.EventType.MediaListWillDeleteItem
+     |  
+     |  MMeeddiiaaMMeettaaCChhaannggeedd = vlc.EventType.MediaMetaChanged
+     |  
+     |  MMeeddiiaaPPaarrsseeddCChhaannggeedd = vlc.EventType.MediaParsedChanged
+     |  
+     |  MMeeddiiaaPPllaayyeerrAAuuddiiooDDeevviiccee = vlc.EventType.MediaPlayerAudioDevice
+     |  
+     |  MMeeddiiaaPPllaayyeerrAAuuddiiooVVoolluummee = vlc.EventType.MediaPlayerAudioVolume
+     |  
+     |  MMeeddiiaaPPllaayyeerrBBaacckkwwaarrdd = vlc.EventType.MediaPlayerBackward
+     |  
+     |  MMeeddiiaaPPllaayyeerrBBuuffffeerriinngg = vlc.EventType.MediaPlayerBuffering
+     |  
+     |  MMeeddiiaaPPllaayyeerrCCoorrkkeedd = vlc.EventType.MediaPlayerCorked
+     |  
+     |  MMeeddiiaaPPllaayyeerrEESSAAddddeedd = vlc.EventType.MediaPlayerESAdded
+     |  
+     |  MMeeddiiaaPPllaayyeerrEESSDDeelleetteedd = vlc.EventType.MediaPlayerESDeleted
+     |  
+     |  MMeeddiiaaPPllaayyeerrEESSSSeelleecctteedd = vlc.EventType.MediaPlayerESSelected
+     |  
+     |  MMeeddiiaaPPllaayyeerrEEnnccoouunntteerreeddEErrrroorr = vlc.EventType.MediaPlayerEncounteredErro...
+     |  
+     |  MMeeddiiaaPPllaayyeerrEEnnddRReeaacchheedd = vlc.EventType.MediaPlayerEndReached
+     |  
+     |  MMeeddiiaaPPllaayyeerrFFoorrwwaarrdd = vlc.EventType.MediaPlayerForward
+     |  
+     |  MMeeddiiaaPPllaayyeerrLLeennggtthhCChhaannggeedd = vlc.EventType.MediaPlayerLengthChanged
+     |  
+     |  MMeeddiiaaPPllaayyeerrMMeeddiiaaCChhaannggeedd = vlc.EventType.MediaPlayerMediaChanged
+     |  
+     |  MMeeddiiaaPPllaayyeerrMMuutteedd = vlc.EventType.MediaPlayerMuted
+     |  
+     |  MMeeddiiaaPPllaayyeerrNNootthhiinnggSSppeecciiaall = vlc.EventType.MediaPlayerNothingSpecial
+     |  
+     |  MMeeddiiaaPPllaayyeerrOOppeenniinngg = vlc.EventType.MediaPlayerOpening
+     |  
+     |  MMeeddiiaaPPllaayyeerrPPaauussaabblleeCChhaannggeedd = vlc.EventType.MediaPlayerPausableChanged
+     |  
+     |  MMeeddiiaaPPllaayyeerrPPaauusseedd = vlc.EventType.MediaPlayerPaused
+     |  
+     |  MMeeddiiaaPPllaayyeerrPPllaayyiinngg = vlc.EventType.MediaPlayerPlaying
+     |  
+     |  MMeeddiiaaPPllaayyeerrPPoossiittiioonnCChhaannggeedd = vlc.EventType.MediaPlayerPositionChanged
+     |  
+     |  MMeeddiiaaPPllaayyeerrSSccrraammbblleeddCChhaannggeedd = vlc.EventType.MediaPlayerScrambledChange...
+     |  
+     |  MMeeddiiaaPPllaayyeerrSSeeeekkaabblleeCChhaannggeedd = vlc.EventType.MediaPlayerSeekableChanged
+     |  
+     |  MMeeddiiaaPPllaayyeerrSSnnaappsshhoottTTaakkeenn = vlc.EventType.MediaPlayerSnapshotTaken
+     |  
+     |  MMeeddiiaaPPllaayyeerrSSttooppppeedd = vlc.EventType.MediaPlayerStopped
+     |  
+     |  MMeeddiiaaPPllaayyeerrTTiimmeeCChhaannggeedd = vlc.EventType.MediaPlayerTimeChanged
+     |  
+     |  MMeeddiiaaPPllaayyeerrTTiittlleeCChhaannggeedd = vlc.EventType.MediaPlayerTitleChanged
+     |  
+     |  MMeeddiiaaPPllaayyeerrUUnnccoorrkkeedd = vlc.EventType.MediaPlayerUncorked
+     |  
+     |  MMeeddiiaaPPllaayyeerrUUnnmmuutteedd = vlc.EventType.MediaPlayerUnmuted
+     |  
+     |  MMeeddiiaaPPllaayyeerrVVoouutt = vlc.EventType.MediaPlayerVout
+     |  
+     |  MMeeddiiaaSSttaatteeCChhaannggeedd = vlc.EventType.MediaStateChanged
+     |  
+     |  MMeeddiiaaSSuubbIItteemmAAddddeedd = vlc.EventType.MediaSubItemAdded
+     |  
+     |  MMeeddiiaaSSuubbIItteemmTTrreeeeAAddddeedd = vlc.EventType.MediaSubItemTreeAdded
+     |  
+     |  VVllmmMMeeddiiaaAAddddeedd = vlc.EventType.VlmMediaAdded
+     |  
+     |  VVllmmMMeeddiiaaCChhaannggeedd = vlc.EventType.VlmMediaChanged
+     |  
+     |  VVllmmMMeeddiiaaIInnssttaanncceeSSttaarrtteedd = vlc.EventType.VlmMediaInstanceStarted
+     |  
+     |  VVllmmMMeeddiiaaIInnssttaanncceeSSttaattuussEEnndd = vlc.EventType.VlmMediaInstanceStatusEnd
+     |  
+     |  VVllmmMMeeddiiaaIInnssttaanncceeSSttaattuussEErrrroorr = vlc.EventType.VlmMediaInstanceStatusErro...
+     |  
+     |  VVllmmMMeeddiiaaIInnssttaanncceeSSttaattuussIInniitt = vlc.EventType.VlmMediaInstanceStatusInit
+     |  
+     |  VVllmmMMeeddiiaaIInnssttaanncceeSSttaattuussOOppeenniinngg = vlc.EventType.VlmMediaInstanceStatusOp...
+     |  
+     |  VVllmmMMeeddiiaaIInnssttaanncceeSSttaattuussPPaauussee = vlc.EventType.VlmMediaInstanceStatusPaus...
+     |  
+     |  VVllmmMMeeddiiaaIInnssttaanncceeSSttaattuussPPllaayyiinngg = vlc.EventType.VlmMediaInstanceStatusPl...
+     |  
+     |  VVllmmMMeeddiiaaIInnssttaanncceeSSttooppppeedd = vlc.EventType.VlmMediaInstanceStopped
+     |  
+     |  VVllmmMMeeddiiaaRReemmoovveedd = vlc.EventType.VlmMediaRemoved
+     |  
+     |  ____ccttyyppee__bbee____ = <class 'vlc.EventType'>
+     |      Event types.
+     |  
+     |  ____ccttyyppee__llee____ = <class 'vlc.EventType'>
+     |      Event types.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _Enum:
+     |  
+     |  ____eeqq____(self, other)
+     |      Return self==value.
+     |  
+     |  ____hhaasshh____(self)
+     |      Return hash(self).
+     |  
+     |  ____nnee____(self, other)
+     |      Return self!=value.
+     |  
+     |  ____rreepprr____(self)
+     |      Return repr(self).
+     |  
+     |  ____ssttrr____(self)
+     |      Return str(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from ctypes.c_uint:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._SimpleCData:
+     |  
+     |  ____bbooooll____(self, /)
+     |      self != 0
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCSimpleType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _ctypes._SimpleCData:
+     |  
+     |  vvaalluuee
+     |      current value
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class EEvveennttUUnniioonn(_ctypes.Union)
+     |  Union base class
+     |  
+     |  Method resolution order:
+     |      EventUnion
+     |      _ctypes.Union
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ffiilleennaammee
+     |      Structure/Union member
+     |  
+     |  mmeeddiiaa
+     |      Structure/Union member
+     |  
+     |  mmeeddiiaa__eevveenntt
+     |      Structure/Union member
+     |  
+     |  mmeettaa__ttyyppee
+     |      Structure/Union member
+     |  
+     |  nneeww__ccaacchhee
+     |      Structure/Union member
+     |  
+     |  nneeww__cchhiilldd
+     |      Structure/Union member
+     |  
+     |  nneeww__ccoouunntt
+     |      Structure/Union member
+     |  
+     |  nneeww__dduurraattiioonn
+     |      Structure/Union member
+     |  
+     |  nneeww__lleennggtthh
+     |      Structure/Union member
+     |  
+     |  nneeww__ppaauussaabbllee
+     |      Structure/Union member
+     |  
+     |  nneeww__ppoossiittiioonn
+     |      Structure/Union member
+     |  
+     |  nneeww__ssccrraammbblleedd
+     |      Structure/Union member
+     |  
+     |  nneeww__sseeeekkaabbllee
+     |      Structure/Union member
+     |  
+     |  nneeww__ssttaattee
+     |      Structure/Union member
+     |  
+     |  nneeww__ssttaattuuss
+     |      Structure/Union member
+     |  
+     |  nneeww__ttiimmee
+     |      Structure/Union member
+     |  
+     |  nneeww__ttiittllee
+     |      Structure/Union member
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes.Union:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.UnionType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class FFIILLEE(_ctypes.Structure)
+     |  Structure base class
+     |  
+     |  Method resolution order:
+     |      FILE
+     |      _ctypes.Structure
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes.Structure:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCStructType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    FFIILLEE__ppttrr = class LP_FILE(_ctypes._Pointer)
+     |  XXX to be provided
+     |  
+     |  Method resolution order:
+     |      LP_FILE
+     |      _ctypes._Pointer
+     |      _ctypes._CData
+     |      builtins.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._Pointer:
+     |  
+     |  ____bbooooll____(self, /)
+     |      self != 0
+     |  
+     |  ____ddeelliitteemm____(self, key, /)
+     |      Delete self[key].
+     |  
+     |  ____ggeettiitteemm____(self, key, /)
+     |      Return self[key].
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from _ctypes.PyCPointerType
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ____sseettiitteemm____(self, key, value, /)
+     |      Set self[key] to value.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from _ctypes._Pointer:
+     |  
+     |  ccoonntteennttss
+     |      the object this pointer points to (read-write)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _ctypes._CData:
+     |  
+     |  ____ccttyyppeess__ffrroomm__oouuttppaarraamm____(...)
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____sseettssttaattee____(...)
+    
+    class IInnssttaannccee(_Ctype)
+     |  Create a new Instance instance.
+     |  
+     |  It may take as parameter either:
+     |    - a string
+     |    - a list of strings as first parameters
+     |    - the parameters given as the constructor parameters (must be strings)
+     |  
+     |  Method resolution order:
+     |      Instance
+     |      _Ctype
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  aadddd__iinnttff(self, name)
+     |      Try to start a user interface for the libvlc instance.
+     |      @param name: interface name, or None for default.
+     |      @return: 0 on success, -1 on error.
+     |  
+     |  aauuddiioo__ffiilltteerr__lliisstt__ggeett(self)
+     |      Returns a list of available audio filters.
+     |  
+     |  aauuddiioo__oouuttppuutt__ddeevviiccee__lliisstt__ggeett(self, aout)
+     |      Gets a list of audio output devices for a given audio output module,
+     |      See L{audio_output_device_set}().
+     |      @note: Not all audio outputs support this. In particular, an empty (None)
+     |      list of devices does B{not} imply that the specified audio output does
+     |      not work.
+     |      @note: The list might not be exhaustive.
+     |      @warning: Some audio output devices in the list might not actually work in
+     |      some circumstances. By default, it is recommended to not specify any
+     |      explicit audio device.
+     |      @param psz_aout: audio output name (as returned by L{audio_output_list_get}()).
+     |      @return: A None-terminated linked list of potential audio output devices. It must be freed with L{audio_output_device_list_release}().
+     |      @version: LibVLC 2.1.0 or later.
+     |  
+     |  aauuddiioo__oouuttppuutt__eennuummeerraattee__ddeevviicceess(self)
+     |      Enumerate the defined audio output devices.
+     |      
+     |      @return: list of dicts {name:, description:, devices:}
+     |  
+     |  aauuddiioo__oouuttppuutt__lliisstt__ggeett(self)
+     |      Gets the list of available audio output modules.
+     |      @return: list of available audio outputs. It must be freed with In case of error, None is returned.
+     |  
+     |  lloogg__sseett(self, data, p_instance)
+     |      Sets the logging callback for a LibVLC instance.
+     |      This function is thread-safe: it will wait for any pending callbacks
+     |      invocation to complete.
+     |      @param data: opaque data pointer for the callback function @note Some log messages (especially debug) are emitted by LibVLC while is being initialized. These messages cannot be captured with this interface. @warning A deadlock may occur if this function is called from the callback.
+     |      @param p_instance: libvlc instance.
+     |      @version: LibVLC 2.1.0 or later.
+     |  
+     |  lloogg__sseett__ffiillee(self, stream)
+     |      Sets up logging to a file.
+     |      @param stream: FILE pointer opened for writing (the FILE pointer must remain valid until L{log_unset}()).
+     |      @version: LibVLC 2.1.0 or later.
+     |  
+     |  lloogg__uunnsseett(self)
+     |      Unsets the logging callback for a LibVLC instance. This is rarely needed:
+     |      the callback is implicitly unset when the instance is destroyed.
+     |      This function will wait for any pending callbacks invocation to complete
+     |      (causing a deadlock if called from within the callback).
+     |      @version: LibVLC 2.1.0 or later.
+     |  
+     |  mmeeddiiaa__ddiissccoovveerreerr__nneeww(self, psz_name)
+     |      Create a media discoverer object by name.
+     |      After this object is created, you should attach to events in order to be
+     |      notified of the discoverer state.
+     |      You should also attach to media_list events in order to be notified of new
+     |      items discovered.
+     |      You need to call L{media_discoverer_start}() in order to start the
+     |      discovery.
+     |      See L{media_discoverer_media_list}
+     |      See L{media_discoverer_event_manager}
+     |      See L{media_discoverer_start}.
+     |      @param psz_name: service name.
+     |      @return: media discover object or None in case of error.
+     |      @version: LibVLC 3.0.0 or later.
+     |  
+     |  mmeeddiiaa__lliibbrraarryy__nneeww(self)
+     |      Create an new Media Library object.
+     |      @return: a new object or None on error.
+     |  
+     |  mmeeddiiaa__lliisstt__nneeww(self, mrls=None)
+     |      Create a new MediaList instance.
+     |      @param mrls: optional list of MRL strings
+     |  
+     |  mmeeddiiaa__lliisstt__ppllaayyeerr__nneeww(self)
+     |      Create a new MediaListPlayer instance.
+     |  
+     |  mmeeddiiaa__nneeww(self, mrl, *options)
+     |      Create a new Media instance.
+     |      
+     |      If mrl contains a colon (:) preceded by more than 1 letter, it
+     |      will be treated as a URL. Else, it will be considered as a
+     |      local path. If you need more control, directly use
+     |      media_new_location/media_new_path methods.
+     |      
+     |      Options can be specified as supplementary string parameters,
+     |      but note that many options cannot be set at the media level,
+     |      and rather at the Instance level. For instance, the marquee
+     |      filter must be specified when creating the vlc.Instance or
+     |      vlc.MediaPlayer.
+     |      
+     |      Alternatively, options can be added to the media using the
+     |      Media.add_options method (with the same limitation).
+     |      
+     |      @param options: optional media option=value strings
+     |  
+     |  mmeeddiiaa__nneeww__aass__nnooddee(self, psz_name)
+     |      Create a media as an empty node with a given name.
+     |      See L{media_release}.
+     |      @param psz_name: the name of the node.
+     |      @return: the new empty media or None on error.
+     |  
+     |  mmeeddiiaa__nneeww__ccaallllbbaacckkss(self, open_cb, read_cb, seek_cb, close_cb, opaque)
+     |      Create a media with custom callbacks to read the data from.
+     |      @param open_cb: callback to open the custom bitstream input media.
+     |      @param read_cb: callback to read data (must not be None).
+     |      @param seek_cb: callback to seek, or None if seeking is not supported.
+     |      @param close_cb: callback to close the media, or None if unnecessary.
+     |      @param opaque: data pointer for the open callback.
+     |      @return: the newly created media or None on error @note If open_cb is None, the opaque pointer will be passed to read_cb, seek_cb and close_cb, and the stream size will be treated as unknown. @note The callbacks may be called asynchronously (from another thread). A single stream instance need not be reentrant. However the open_cb needs to be reentrant if the media is used by multiple player instances. @warning The callbacks may be used until all or any player instances that were supplied the media item are stopped. See L{media_release}.
+     |      @version: LibVLC 3.0.0 and later.
+     |  
+     |  mmeeddiiaa__nneeww__ffdd(self, fd)
+     |      Create a media for an already open file descriptor.
+     |      The file descriptor shall be open for reading (or reading and writing).
+     |      Regular file descriptors, pipe read descriptors and character device
+     |      descriptors (including TTYs) are supported on all platforms.
+     |      Block device descriptors are supported where available.
+     |      Directory descriptors are supported on systems that provide fdopendir().
+     |      Sockets are supported on all platforms where they are file descriptors,
+     |      i.e. all except Windows.
+     |      @note: This library will B{not} automatically close the file descriptor
+     |      under any circumstance. Nevertheless, a file descriptor can usually only be
+     |      rendered once in a media player. To render it a second time, the file
+     |      descriptor should probably be rewound to the beginning with lseek().
+     |      See L{media_release}.
+     |      @param fd: open file descriptor.
+     |      @return: the newly created media or None on error.
+     |      @version: LibVLC 1.1.5 and later.
+     |  
+     |  mmeeddiiaa__nneeww__llooccaattiioonn(self, psz_mrl)
+     |      Create a media with a certain given media resource location,
+     |      for instance a valid URL.
+     |      @note: To refer to a local file with this function,
+     |      the file://... URI syntax B{must} be used (see IETF RFC3986).
+     |      We recommend using L{media_new_path}() instead when dealing with
+     |      local files.
+     |      See L{media_release}.
+     |      @param psz_mrl: the media location.
+     |      @return: the newly created media or None on error.
+     |  
+     |  mmeeddiiaa__nneeww__ppaatthh(self, path)
+     |      Create a media for a certain file path.
+     |      See L{media_release}.
+     |      @param path: local filesystem path.
+     |      @return: the newly created media or None on error.
+     |  
+     |  mmeeddiiaa__ppllaayyeerr__nneeww(self, uri=None)
+     |      Create a new MediaPlayer instance.
+     |      
+     |      @param uri: an optional URI to play in the player.
+     |  
+     |  rreelleeaassee(self)
+     |      Decrement the reference count of a libvlc instance, and destroy it
+     |      if it reaches zero.
+     |  
+     |  rreettaaiinn(self)
+     |      Increments the reference count of a libvlc instance.
+     |      The initial reference count is 1 after L{new}() returns.
+     |  
+     |  sseett__aapppp__iidd(self, id, version, icon)
+     |      Sets some meta-information about the application.
+     |      See also L{set_user_agent}().
+     |      @param id: Java-style application identifier, e.g. "com.acme.foobar".
+     |      @param version: application version numbers, e.g. "1.2.3".
+     |      @param icon: application icon name, e.g. "foobar".
+     |      @version: LibVLC 2.1.0 or later.
+     |  
+     |  sseett__uusseerr__aaggeenntt(self, name, http)
+     |      Sets the application name. LibVLC passes this as the user agent string
+     |      when a protocol requires it.
+     |      @param name: human-readable application name, e.g. "FooBar player 1.2.3".
+     |      @param http: HTTP User Agent, e.g. "FooBar/1.2.3 Python/2.6.0".
+     |      @version: LibVLC 1.1.1 or later.
+     |  
+     |  vviiddeeoo__ffiilltteerr__lliisstt__ggeett(self)
+     |      Returns a list of available video filters.
+     |  
+     |  vvllmm__aadddd__bbrrooaaddccaasstt(self, psz_name, psz_input, psz_output, i_options, ppsz_options, b_enabled, b_loop)
+     |      Add a broadcast, with one input.
+     |      @param psz_name: the name of the new broadcast.
+     |      @param psz_input: the input MRL.
+     |      @param psz_output: the output MRL (the parameter to the "sout" variable).
+     |      @param i_options: number of additional options.
+     |      @param ppsz_options: additional options.
+     |      @param b_enabled: boolean for enabling the new broadcast.
+     |      @param b_loop: Should this broadcast be played in loop ?
+     |      @return: 0 on success, -1 on error.
+     |  
+     |  vvllmm__aadddd__iinnppuutt(self, psz_name, psz_input)
+     |      Add a media's input MRL. This will add the specified one.
+     |      @param psz_name: the media to work on.
+     |      @param psz_input: the input MRL.
+     |      @return: 0 on success, -1 on error.
+     |  
+     |  vvllmm__aadddd__vvoodd(self, psz_name, psz_input, i_options, ppsz_options, b_enabled, psz_mux)
+     |      Add a vod, with one input.
+     |      @param psz_name: the name of the new vod media.
+     |      @param psz_input: the input MRL.
+     |      @param i_options: number of additional options.
+     |      @param ppsz_options: additional options.
+     |      @param b_enabled: boolean for enabling the new vod.
+     |      @param psz_mux: the muxer of the vod media.
+     |      @return: 0 on success, -1 on error.
+     |  
+     |  vvllmm__cchhaannggee__mmeeddiiaa(self, psz_name, psz_input, psz_output, i_options, ppsz_options, b_enabled, b_loop)
+     |      Edit the parameters of a media. This will delete all existing inputs and
+     |      add the specified one.
+     |      @param psz_name: the name of the new broadcast.
+     |      @param psz_input: the input MRL.
+     |      @param psz_output: the output MRL (the parameter to the "sout" variable).
+     |      @param i_options: number of additional options.
+     |      @param ppsz_options: additional options.
+     |      @param b_enabled: boolean for enabling the new broadcast.
+     |      @param b_loop: Should this broadcast be played in loop ?
+     |      @return: 0 on success, -1 on error.
+     |  
+     |  vvllmm__ddeell__mmeeddiiaa(self, psz_name)
+     |      Delete a media (VOD or broadcast).
+     |      @param psz_name: the media to delete.
+     |      @return: 0 on success, -1 on error.
+     |  
+     |  vvllmm__ggeett__mmeeddiiaa__iinnssttaannccee__cchhaapptteerr(self, psz_name, i_instance)
+     |      Get vlm_media instance chapter number by name or instance id.
+     |      @param psz_name: name of vlm media instance.
+     |      @param i_instance: instance id.
+     |      @return: chapter as number or -1 on error.
+     |      @bug: will always return 0.
+     |  
+     |  vvllmm__ggeett__mmeeddiiaa__iinnssttaannccee__lleennggtthh(self, psz_name, i_instance)
+     |      Get vlm_media instance length by name or instance id.
+     |      @param psz_name: name of vlm media instance.
+     |      @param i_instance: instance id.
+     |      @return: length of media item or -1 on error.
+     |  
+     |  vvllmm__ggeett__mmeeddiiaa__iinnssttaannccee__ppoossiittiioonn(self, psz_name, i_instance)
+     |      Get vlm_media instance position by name or instance id.
+     |      @param psz_name: name of vlm media instance.
+     |      @param i_instance: instance id.
+     |      @return: position as float or -1. on error.
+     |  
+     |  vvllmm__ggeett__mmeeddiiaa__iinnssttaannccee__rraattee(self, psz_name, i_instance)
+     |      Get vlm_media instance playback rate by name or instance id.
+     |      @param psz_name: name of vlm media instance.
+     |      @param i_instance: instance id.
+     |      @return: playback rate or -1 on error.
+     |  
+     |  vvllmm__ggeett__mmeeddiiaa__iinnssttaannccee__sseeeekkaabbllee(self, psz_name, i_instance)
+     |      Is libvlc instance seekable ?
+     |      @param psz_name: name of vlm media instance.
+     |      @param i_instance: instance id.
+     |      @return: 1 if seekable, 0 if not, -1 if media does not exist.
+     |      @bug: will always return 0.
+     |  
+     |  vvllmm__ggeett__mmeeddiiaa__iinnssttaannccee__ttiimmee(self, psz_name, i_instance)
+     |      Get vlm_media instance time by name or instance id.
+     |      @param psz_name: name of vlm media instance.
+     |      @param i_instance: instance id.
+     |      @return: time as integer or -1 on error.
+     |  
+     |  vvllmm__ggeett__mmeeddiiaa__iinnssttaannccee__ttiittllee(self, psz_name, i_instance)
+     |      Get vlm_media instance title number by name or instance id.
+     |      @param psz_name: name of vlm media instance.
+     |      @param i_instance: instance id.
+     |      @return: title as number or -1 on error.
+     |      @bug: will always return 0.
+     |  
+     |  vvllmm__ppaauussee__mmeeddiiaa(self, psz_name)
+     |      Pause the named broadcast.
+     |      @param psz_name: the name of the broadcast.
+     |      @return: 0 on success, -1 on error.
+     |  
+     |  vvllmm__ppllaayy__mmeeddiiaa(self, psz_name)
+     |      Play the named broadcast.
+     |      @param psz_name: the name of the broadcast.
+     |      @return: 0 on success, -1 on error.
+     |  
+     |  vvllmm__rreelleeaassee(self)
+     |      Release the vlm instance related to the given L{Instance}.
+     |  
+     |  vvllmm__sseeeekk__mmeeddiiaa(self, psz_name, f_percentage)
+     |      Seek in the named broadcast.
+     |      @param psz_name: the name of the broadcast.
+     |      @param f_percentage: the percentage to seek to.
+     |      @return: 0 on success, -1 on error.
+     |  
+     |  vvllmm__sseett__eennaabblleedd(self, psz_name, b_enabled)
+     |      Enable or disable a media (VOD or broadcast).
+     |      @param psz_name: the media to work on.
+     |      @param b_enabled: the new status.
+     |      @return: 0 on success, -1 on error.
+     |  
+     |  vvllmm__sseett__iinnppuutt(self, psz_name, psz_input)
+     |      Set a media's input MRL. This will delete all existing inputs and
+     |      add the specified one.
+     |      @param psz_name: the media to work on.
+     |      @param psz_input: the input MRL.
+     |      @return: 0 on success, -1 on error.
+     |  
+     |  vvllmm__sseett__lloooopp(self, psz_name, b_loop)
+     |      Set a media's loop status.
+     |      @param psz_name: the media to work on.
+     |      @param b_loop: the new status.
+     |      @return: 0 on success, -1 on error.
+     |  
+     |  vvllmm__sseett__mmuuxx(self, psz_name, psz_mux)
+     |      Set a media's vod muxer.
+     |      @param psz_name: the media to work on.
+     |      @param psz_mux: the new muxer.
+     |      @return: 0 on success, -1 on error.
+     |  
+     |  vvllmm__sseett__oouuttppuutt(self, psz_name, psz_output)
+     |      Set the output for a media.
+     |      @param psz_name: the media to work on.
+     |      @param psz_output: the output MRL (the parameter to the "sout" variable).
+     |      @return: 0 on success, -1 on error.
+     |  
+     |  vvllmm__sshhooww__mmeeddiiaa(self, psz_name)
+     |      Return information about the named media as a JSON
+     |      string representation.
+     |      This function is mainly intended for debugging use,
+     |      if you want programmatic access to the state of
+     |      a vlm_media_instance_t, please use the corresponding
+     |      libvlc_vlm_get_media_instance_xxx -funct
