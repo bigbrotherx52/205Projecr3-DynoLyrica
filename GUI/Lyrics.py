@@ -1,4 +1,4 @@
-import os,sys
+import os,sys,random
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
 from PyQt5 import QtCore
@@ -34,6 +34,7 @@ class Window2(QtWidgets.QDialog):
     def init_ui(self):
         self.mySearchBtn= QtWidgets.QPushButton('Download')
         self.myLabel = QtWidgets.QLabel('Enter name of video to download: ')
+
         self.searchBox = QtWidgets.QLineEdit()
         
         h_box = QtWidgets.QHBoxLayout()
@@ -81,6 +82,8 @@ class Window(QtWidgets.QWidget):
         self.colSwitch = 0
         self.fontSize = 11
         self.padding = 0
+        self.ranFont = 0
+        self.ranColor = 0
         self.colArray = ['Black','Green','Yellow','Orange','Red','Pink','Purple','Blue','Black']
         self.pic = QtWidgets.QLabel(self)
         self.pic.setGeometry(00,00,500,300)
@@ -89,19 +92,45 @@ class Window(QtWidgets.QWidget):
         self.counter = 0
         self.colors = [(255,255,255), (0,0,255)]
 
+        ##  LIST OF COLORS
+        self.colors = [ (255,0,0),
+            (255,69,0),
+            (255,255,0),
+            (0,255,0),
+            (0,0,255),
+            (128,0,128),
+            (0,0,0),
+            (165,42,42),
+            (128,0,0),
+            (192,192,192),
+            (0,128,128),
+            (0,255,255),
+            (255,0,255)]
+
+        ##  LIST OF FONTS
+        self.fonts = [ "Times New Roman", "Arial", "Lucida Bright", "New Century Schoolbook", "Source Sans Pro", "Semibold", "Courier"]
+
 
         self.myButton = QtWidgets.QPushButton('Before')
         self.myButton2 = QtWidgets.QPushButton('Next')
         self.myButton3 = QtWidgets.QPushButton('Before \n Image')
         self.myButton4 = QtWidgets.QPushButton('Next \n Image')
         self.myLabel = QtWidgets.QLabel(lyrics[self.counter])
+
+        self.myLabel.setStyleSheet("color:rgb" + str(self.colors[0]) + ", font-family: " + str(self.fonts[0]))
+
         self.myLabel2 = QtWidgets.QLabel(timeStamp[self.counter])
+        self.myLabel3 = QtWidgets.QLabel('')	#spacing
+        self.myLabel4 = QtWidgets.QLabel('')	#spacing
         #color change button
         self.myButton5 = QtWidgets.QPushButton('Green')
         self.myButton6 = QtWidgets.QPushButton('Font \n Size')
         self.myButton7 = QtWidgets.QPushButton('Text \n Right')
+        #randomize color (uses list at the top)
+        self.myButton8 = QtWidgets.QPushButton('Randomize \n Color')
+        self.myButton9 = QtWidgets.QPushButton('Change \n Font')
         self.myButton10 = QtWidgets.QPushButton('Song \n Downloader')
-        self.myButton11 = QtWidgets.QPushButton('Play')
+        self.myButton11 = QtWidgets.QPushButton('Play \n ')
 
         #Slider stuff
         self.slider = QtWidgets.QSlider()
@@ -116,16 +145,20 @@ class Window(QtWidgets.QWidget):
         #h_box.addWidget(self.myButton2)	#next
         h_box.addWidget(self.myButton3)
         h_box.addWidget(self.myButton4)
-        h_box.addWidget(self.myButton5)
+        #h_box.addWidget(self.myButton5)	#choice of color
         h_box.addWidget(self.myButton6)
         h_box.addWidget(self.myButton7)
+        h_box.addWidget(self.myButton8)
+        h_box.addWidget(self.myButton9)
         h_box.addWidget(self.myButton10)
         h_box.addWidget(self.myButton11)
         
         #h_box.addStretch()
 
         v_box = QtWidgets.QVBoxLayout()
+        v_box.addWidget(self.myLabel3)
         v_box.addWidget(self.myLabel)
+        v_box.addWidget(self.myLabel4)
         v_box.addWidget(self.myLabel2)
         v_box.addWidget(self.slider)
         v_box.addLayout(h_box)
@@ -133,7 +166,7 @@ class Window(QtWidgets.QWidget):
 
         self.setLayout(v_box)
         self.setWindowTitle('Next')
-        self.setGeometry(300,300,500,350)
+        self.setGeometry(300,300,500,400)
 
         # create connection between signal (click) and slot (stuff in parens)
         self.myButton.clicked.connect(self.btn_click)
@@ -147,6 +180,8 @@ class Window(QtWidgets.QWidget):
         self.myButton5.clicked.connect(self.btn_click5)
         self.myButton6.clicked.connect(self.btn_click6)
         self.myButton7.clicked.connect(self.btn_click7)
+        self.myButton8.clicked.connect(self.btn_click8)
+        self.myButton9.clicked.connect(self.btn_click9)
         self.myButton10.clicked.connect(self.btn_click10)
         self.myButton11.clicked.connect(self.btn_click11)	#VLC
 
@@ -155,6 +190,8 @@ class Window(QtWidgets.QWidget):
 
         self.setWindowTitle('Dynamic Lyrics')    
         #self.show()
+
+        self.myLabel.setStyleSheet("color:rgb" + str(self.colors[1]) + ", font-family: " + str(self.fonts[0]))
 
 
     def btn_click(self):
@@ -179,20 +216,28 @@ class Window(QtWidgets.QWidget):
         self.colSwitch += 1
         if(self.colSwitch == 8):
             self.colSwitch = 0
-        self.myLabel.setStyleSheet("color:" + self.colArray[self.colSwitch] + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
+        self.myLabel.setStyleSheet("color:rgb" + str(self.colors[self.ranColor]) + "; font-family: " + str(self.fonts[self.ranFont]) + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
         self.myButton5.setText(self.colArray[self.colSwitch+1])
 
     def btn_click6(self):
         self.fontSize += 2
         if(self.fontSize > 30):
             self.fontSize = 11
-        self.myLabel.setStyleSheet("color:" + self.colArray[self.colSwitch] + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
+        self.myLabel.setStyleSheet("color:rgb" + str(self.colors[self.ranColor]) + "; font-family: " + str(self.fonts[self.ranFont]) + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
 
     def btn_click7(self):
         self.padding += 4
         if(self.padding > 20):
             self.padding = 0
-        self.myLabel.setStyleSheet("color:" + self.colArray[self.colSwitch] + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
+        self.myLabel.setStyleSheet("color:rgb" + str(self.colors[self.ranColor]) + "; font-family: " + str(self.fonts[self.ranFont]) + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
+
+    def btn_click8(self):
+        self.ranColor = random.randint(0,12)
+        self.myLabel.setStyleSheet("color:rgb" + str(self.colors[self.ranColor]) + "; font-family: " + str(self.fonts[self.ranFont]) + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
+
+    def btn_click9(self):
+        self.ranFont = random.randint(0,6)
+        self.myLabel.setStyleSheet("color:rgb" + str(self.colors[self.ranColor]) + "; font-family: " + str(self.fonts[self.ranFont]) + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
 
     def btn_click10(self):
         self.dialogTextBrowser.exec_()
