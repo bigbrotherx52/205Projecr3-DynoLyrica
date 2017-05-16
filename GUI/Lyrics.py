@@ -133,7 +133,7 @@ class Window(QtWidgets.QWidget):
 
         self.setLayout(v_box)
         self.setWindowTitle('Next')
-        self.setGeometry(200,200,500,300)
+        self.setGeometry(300,300,500,350)
 
         # create connection between signal (click) and slot (stuff in parens)
         self.myButton.clicked.connect(self.btn_click)
