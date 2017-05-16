@@ -76,6 +76,7 @@ class Window(QtWidgets.QWidget):
 
     def init_ui(self):
 
+<<<<<<< HEAD
         self.imgSwitch = 1	#For image switch
         self.colSwitch = 0	#For color Switching
         self.fontSize = 11	#Initializes font size
@@ -85,9 +86,21 @@ class Window(QtWidgets.QWidget):
         self.colArray = ['Black','Green','Yellow','Orange','Red','Pink','Purple','Blue','Black']	#Initializes color array
         self.pic = QtWidgets.QLabel(self)	#For picture background
         self.pic.setGeometry(00,00,500,300)	#Where the picture is centered
+=======
+        self.imgSwitch = 1
+        self.colSwitch = 0
+        self.fontSize = 11
+        self.padding = 0
+        self.ranFont = 0
+        self.ranColor = 0
+        self.colArray = ['Black','Green','Yellow','Orange','Red','Pink','Purple','Blue','Black']
+        self.pic = QtWidgets.QLabel(self)
+        self.pic.setGeometry(00,00,500,300)
+>>>>>>> 03eb733a151686624299f2ee7289382f96a44eca
         self.pic.setScaledContents(True)
         self.pic.setPixmap(QtGui.QPixmap(os.getcwd() + "/" + str(self.imgSwitch) + ".png"))	#Chooses first image
         self.counter = 0
+<<<<<<< HEAD
 
         ##  LIST OF COLORS
         self.colors = [ (255,0,0),
@@ -120,6 +133,44 @@ class Window(QtWidgets.QWidget):
         self.myButton5 = QtWidgets.QPushButton('Green')		#Sets label of button as green
         self.myButton6 = QtWidgets.QPushButton('Font \n Size')	#Change font size button
         self.myButton7 = QtWidgets.QPushButton('Text \n Right')	#Moves text right button
+=======
+        self.colors = [(255,255,255), (0,0,255)]
+
+        ##  LIST OF COLORS
+        self.colors = [ (255,0,0),
+            (255,69,0),
+            (255,255,0),
+            (0,255,0),
+            (0,0,255),
+            (128,0,128),
+            (0,0,0),
+            (165,42,42),
+            (128,0,0),
+            (192,192,192),
+            (0,128,128),
+            (0,255,255),
+            (255,0,255)]
+
+        ##  LIST OF FONTS
+        self.fonts = [ "Times New Roman", "Arial", "Lucida Bright", "New Century Schoolbook", "Source Sans Pro", "Semibold", "Courier"]
+
+
+        self.myButton = QtWidgets.QPushButton('Before')
+        self.myButton2 = QtWidgets.QPushButton('Next')
+        self.myButton3 = QtWidgets.QPushButton('Before \n Image')
+        self.myButton4 = QtWidgets.QPushButton('Next \n Image')
+        self.myLabel = QtWidgets.QLabel(lyrics[self.counter])
+
+        self.myLabel.setStyleSheet("color:rgb" + str(self.colors[0]) + ", font-family: " + str(self.fonts[0]))
+
+        self.myLabel2 = QtWidgets.QLabel(timeStamp[self.counter])
+        self.myLabel3 = QtWidgets.QLabel('')	#spacing
+        self.myLabel4 = QtWidgets.QLabel('')	#spacing
+        #color change button
+        self.myButton5 = QtWidgets.QPushButton('Green')
+        self.myButton6 = QtWidgets.QPushButton('Font \n Size')
+        self.myButton7 = QtWidgets.QPushButton('Text \n Right')
+>>>>>>> 03eb733a151686624299f2ee7289382f96a44eca
         #randomize color (uses list at the top)
         self.myButton8 = QtWidgets.QPushButton('Randomize \n Color')
         self.myButton9 = QtWidgets.QPushButton('Change \n Font')
@@ -159,7 +210,12 @@ class Window(QtWidgets.QWidget):
         
 
         self.setLayout(v_box)
+<<<<<<< HEAD
         self.setGeometry(300,300,500,400)	#Places the window in certain position with certain dimensions
+=======
+        self.setWindowTitle('Next')
+        self.setGeometry(300,300,500,400)
+>>>>>>> 03eb733a151686624299f2ee7289382f96a44eca
 
         # create connection between signal (click) and slot (stuff in parens)
         self.myButton.clicked.connect(self.btn_click)
@@ -179,6 +235,8 @@ class Window(QtWidgets.QWidget):
 
         self.setWindowTitle('Dynamic Lyrics')    
         #self.show()
+
+        self.myLabel.setStyleSheet("color:rgb" + str(self.colors[1]) + ", font-family: " + str(self.fonts[0]))
 
 
     def btn_click(self):
@@ -218,11 +276,19 @@ class Window(QtWidgets.QWidget):
             self.padding = 0
         self.myLabel.setStyleSheet("color:rgb" + str(self.colors[self.ranColor]) + "; font-family: " + str(self.fonts[self.ranFont]) + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
 
+<<<<<<< HEAD
     def btn_click8(self):		#Sets color to random
         self.ranColor = random.randint(0,12)
         self.myLabel.setStyleSheet("color:rgb" + str(self.colors[self.ranColor]) + "; font-family: " + str(self.fonts[self.ranFont]) + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
 
     def btn_click9(self):		#Sets font to random
+=======
+    def btn_click8(self):
+        self.ranColor = random.randint(0,12)
+        self.myLabel.setStyleSheet("color:rgb" + str(self.colors[self.ranColor]) + "; font-family: " + str(self.fonts[self.ranFont]) + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
+
+    def btn_click9(self):
+>>>>>>> 03eb733a151686624299f2ee7289382f96a44eca
         self.ranFont = random.randint(0,6)
         self.myLabel.setStyleSheet("color:rgb" + str(self.colors[self.ranColor]) + "; font-family: " + str(self.fonts[self.ranFont]) + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
 
