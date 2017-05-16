@@ -1,3 +1,8 @@
+#CST205 - Dynamic Lyrics
+#The point of this project is to allow of easy creation of Dynamic Lyric Videos
+#Authors: Westley Mixon, Eric Munoz, Harlen Cheer, Logan Louks
+#May 15th, 2017
+
 import os,sys,random
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
