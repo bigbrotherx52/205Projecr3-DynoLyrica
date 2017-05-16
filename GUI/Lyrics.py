@@ -10,13 +10,13 @@ import re
 
 import vlc
 
-with open ("MGMT - Kids.lrc", "r") as file:
+with open ("MGMT - Kids.lrc", "r") as file:		#Reads all of lines of the lrc file
     data=file.readlines()
 
-timeStamp = data[:]
-lyrics = data[:]
+timeStamp = data[:]	#creates new array for timestamps
+lyrics = data[:]	#creates new array for lyrics
 xx = 0
-for x in timeStamp:
+for x in timeStamp:		#trims the uneeded values on timestamps and lyrics to keep them seperate.
     timeStamp[xx] = x[:10]
     lyrics[xx] = x[10:]
     xx += 1
@@ -31,7 +31,7 @@ class Window2(QtWidgets.QDialog):
         self.init_ui()
 
 
-    def init_ui(self):
+    def init_ui(self):		#This is a new window for downloading a youtube video as m4a
         self.mySearchBtn= QtWidgets.QPushButton('Download')
         self.myLabel = QtWidgets.QLabel('Enter name of video to download: ')
 
@@ -39,33 +39,31 @@ class Window2(QtWidgets.QDialog):
         
         h_box = QtWidgets.QHBoxLayout()
         h_box.addStretch()
-        h_box.addWidget(self.myLabel)
+        h_box.addWidget(self.myLabel)	#Label under search
         h_box.addStretch()
 
         v_box = QtWidgets.QVBoxLayout()
-        v_box.addWidget(self.searchBox)
-        v_box.addWidget(self.mySearchBtn)
+        v_box.addWidget(self.searchBox)		#Search text box for searching for video downloads
+        v_box.addWidget(self.mySearchBtn)	#Search button
         v_box.addLayout(h_box)
 
         self.setLayout(v_box)
-        self.setWindowTitle('Next')
 
-        self.mySearchBtn.clicked.connect(self.btn_search)
+        self.mySearchBtn.clicked.connect(self.btn_search)	#Connects btn_search with download button
 
-        self.setWindowTitle('Youtube Searcher')
+        self.setWindowTitle('Youtube Searcher')		#Title of download window
 
     def btn_search(self):
         
-        query_string = urllib.parse.urlencode({"search_query" : self.searchBox.text()})
-        html_content = urllib.request.urlopen("http://www.youtube.com/results?" + query_string)
-        search_results = re.findall(r'href=\"\/watch\?v=(.{11})', html_content.read().decode())
-        url = "http://www.youtube.com/watch?v=" + search_results[0]
-        video = pafy.new(url)
-        #print(video.title)
-        self.myLabel.setText(video.title + "\n" + url)
-        duration = video.duration
-        audiostreams = video.audiostreams
-        video.getbestaudio(preftype="m4a").download("music")
+        query_string = urllib.parse.urlencode({"search_query" : self.searchBox.text()})				#Sets the search to what you entered in the textbox
+        html_content = urllib.request.urlopen("http://www.youtube.com/results?" + query_string)		#Requests the result
+        search_results = re.findall(r'href=\"\/watch\?v=(.{11})', html_content.read().decode())		#Decodes the code to something readable
+        url = "http://www.youtube.com/watch?v=" + search_results[0]				#Saves url for display
+        video = pafy.new(url)		#Used so we can actually download the video 
+        self.myLabel.setText(video.title + "\n" + url)		#Where the URL is actually displayed
+        duration = video.duration		#Get duration of video
+        audiostreams = video.audiostreams		#Grabs audio streams
+        video.getbestaudio(preftype="m4a").download("music")	#downloads the m4a version of the audio and saves it as music
 
 # inherit from QWidget class
 # QWidget class is the base class of all user interface objects
@@ -78,19 +76,18 @@ class Window(QtWidgets.QWidget):
 
     def init_ui(self):
 
-        self.imgSwitch = 1
-        self.colSwitch = 0
-        self.fontSize = 11
-        self.padding = 0
-        self.ranFont = 0
-        self.ranColor = 0
-        self.colArray = ['Black','Green','Yellow','Orange','Red','Pink','Purple','Blue','Black']
-        self.pic = QtWidgets.QLabel(self)
-        self.pic.setGeometry(00,00,500,300)
+        self.imgSwitch = 1	#For image switch
+        self.colSwitch = 0	#For color Switching
+        self.fontSize = 11	#Initializes font size
+        self.padding = 0	#Used to push the font more to the center
+        self.ranFont = 0	#Initializes random font index
+        self.ranColor = 0	#Initializes random color index
+        self.colArray = ['Black','Green','Yellow','Orange','Red','Pink','Purple','Blue','Black']	#Initializes color array
+        self.pic = QtWidgets.QLabel(self)	#For picture background
+        self.pic.setGeometry(00,00,500,300)	#Where the picture is centered
         self.pic.setScaledContents(True)
-        self.pic.setPixmap(QtGui.QPixmap(os.getcwd() + "/" + str(self.imgSwitch) + ".png"))
+        self.pic.setPixmap(QtGui.QPixmap(os.getcwd() + "/" + str(self.imgSwitch) + ".png"))	#Chooses first image
         self.counter = 0
-        self.colors = [(255,255,255), (0,0,255)]
 
         ##  LIST OF COLORS
         self.colors = [ (255,0,0),
@@ -108,24 +105,21 @@ class Window(QtWidgets.QWidget):
             (255,0,255)]
 
         ##  LIST OF FONTS
-        self.fonts = [ "Times New Roman", "Arial", "Lucida Bright", "New Century Schoolbook", "Source Sans Pro", "Semibold", "Courier"]
+        self.fonts = [ "Times New Roman", "Arial", "Lucida Bright", "New Century Schoolbook", "Source Sans Pro", "Semibold", "Courier", "Algerian", "Broadway", "Impact", "Magneto", "Pristina", "Vivaldi"]
 
 
-        self.myButton = QtWidgets.QPushButton('Before')
-        self.myButton2 = QtWidgets.QPushButton('Next')
-        self.myButton3 = QtWidgets.QPushButton('Before \n Image')
-        self.myButton4 = QtWidgets.QPushButton('Next \n Image')
-        self.myLabel = QtWidgets.QLabel(lyrics[self.counter])
-
-        self.myLabel.setStyleSheet("color:rgb" + str(self.colors[0]) + ", font-family: " + str(self.fonts[0]))
-
-        self.myLabel2 = QtWidgets.QLabel(timeStamp[self.counter])
-        self.myLabel3 = QtWidgets.QLabel('')	#spacing
+        self.myButton = QtWidgets.QPushButton('Before')		#Lyrics before button
+        self.myButton2 = QtWidgets.QPushButton('Next')		#Lyrics after button
+        self.myButton3 = QtWidgets.QPushButton('Before \n Image')	#Go to next image button
+        self.myButton4 = QtWidgets.QPushButton('Next \n Image')		#Go to previous image button
+        self.myLabel = QtWidgets.QLabel(lyrics[self.counter])		#Displays lyrics
+        self.myLabel2 = QtWidgets.QLabel(timeStamp[self.counter])	#Displays Time stamp
+        self.myLabel3 = QtWidgets.QLabel('')	#spacing	
         self.myLabel4 = QtWidgets.QLabel('')	#spacing
         #color change button
-        self.myButton5 = QtWidgets.QPushButton('Green')
-        self.myButton6 = QtWidgets.QPushButton('Font \n Size')
-        self.myButton7 = QtWidgets.QPushButton('Text \n Right')
+        self.myButton5 = QtWidgets.QPushButton('Green')		#Sets label of button as green
+        self.myButton6 = QtWidgets.QPushButton('Font \n Size')	#Change font size button
+        self.myButton7 = QtWidgets.QPushButton('Text \n Right')	#Moves text right button
         #randomize color (uses list at the top)
         self.myButton8 = QtWidgets.QPushButton('Randomize \n Color')
         self.myButton9 = QtWidgets.QPushButton('Change \n Font')
@@ -135,10 +129,10 @@ class Window(QtWidgets.QWidget):
         #Slider stuff
         self.slider = QtWidgets.QSlider()
         self.slider.setOrientation(QtCore.Qt.Horizontal)
-        self.slider.valueChanged.connect(self.valuec)
+        self.slider.valueChanged.connect(self.valuec)	#Sets slider so that when the value is changed it is able to change the timestamp
 
 
-
+        #Layout for horizontal widgets
         h_box = QtWidgets.QHBoxLayout()
         h_box.addStretch()
         #h_box.addWidget(self.myButton)		#before
@@ -154,7 +148,7 @@ class Window(QtWidgets.QWidget):
         h_box.addWidget(self.myButton11)
         
         #h_box.addStretch()
-
+        #Layout for vertical widgets
         v_box = QtWidgets.QVBoxLayout()
         v_box.addWidget(self.myLabel3)
         v_box.addWidget(self.myLabel)
@@ -165,18 +159,13 @@ class Window(QtWidgets.QWidget):
         
 
         self.setLayout(v_box)
-        self.setWindowTitle('Next')
-        self.setGeometry(300,300,500,400)
+        self.setGeometry(300,300,500,400)	#Places the window in certain position with certain dimensions
 
         # create connection between signal (click) and slot (stuff in parens)
         self.myButton.clicked.connect(self.btn_click)
-        # create connection between signal (click) and slot (stuff in parens)
         self.myButton2.clicked.connect(self.btn_click2)
-        # create connection between signal (click) and slot (stuff in parens)
         self.myButton3.clicked.connect(self.btn_click3)
-        # create connection between signal (click) and slot (stuff in parens)
         self.myButton4.clicked.connect(self.btn_click4)
-        # create connection between signal (click) and slot (stuff in parens)
         self.myButton5.clicked.connect(self.btn_click5)
         self.myButton6.clicked.connect(self.btn_click6)
         self.myButton7.clicked.connect(self.btn_click7)
@@ -185,13 +174,11 @@ class Window(QtWidgets.QWidget):
         self.myButton10.clicked.connect(self.btn_click10)
         self.myButton11.clicked.connect(self.btn_click11)	#VLC
 
-        
+        #Creates window two when you click then button for downloading
         self.dialogTextBrowser = Window2(self)
 
         self.setWindowTitle('Dynamic Lyrics')    
         #self.show()
-
-        self.myLabel.setStyleSheet("color:rgb" + str(self.colors[1]) + ", font-family: " + str(self.fonts[0]))
 
 
     def btn_click(self):
@@ -204,7 +191,7 @@ class Window(QtWidgets.QWidget):
         self.myLabel.setText(lyrics[self.counter])
         self.myLabel2.setText(timeStamp[self.counter])
 
-    def btn_click3(self):
+    def btn_click3(self):		#Switches images
         self.imgSwitch -= 1
         self.pic.setPixmap(QtGui.QPixmap(os.getcwd() + "/" + str(self.imgSwitch) + ".png"))
 
@@ -212,43 +199,43 @@ class Window(QtWidgets.QWidget):
         self.imgSwitch += 1
         self.pic.setPixmap(QtGui.QPixmap(os.getcwd() + "/" + str(self.imgSwitch) + ".png"))
 
-    def btn_click5(self):
+    def btn_click5(self):		#Used to switch colors with counter so that the rest for the functions work with it
         self.colSwitch += 1
         if(self.colSwitch == 8):
             self.colSwitch = 0
         self.myLabel.setStyleSheet("color:rgb" + str(self.colors[self.ranColor]) + "; font-family: " + str(self.fonts[self.ranFont]) + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
         self.myButton5.setText(self.colArray[self.colSwitch+1])
 
-    def btn_click6(self):
+    def btn_click6(self):		#Changes font size, entire style sheet is needed each time or there will be a loss in the style sheet
         self.fontSize += 2
         if(self.fontSize > 30):
             self.fontSize = 11
         self.myLabel.setStyleSheet("color:rgb" + str(self.colors[self.ranColor]) + "; font-family: " + str(self.fonts[self.ranFont]) + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
 
-    def btn_click7(self):
+    def btn_click7(self):		#Moves the lyrics over by incrememted amount
         self.padding += 4
         if(self.padding > 20):
             self.padding = 0
         self.myLabel.setStyleSheet("color:rgb" + str(self.colors[self.ranColor]) + "; font-family: " + str(self.fonts[self.ranFont]) + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
 
-    def btn_click8(self):
+    def btn_click8(self):		#Sets color to random
         self.ranColor = random.randint(0,12)
         self.myLabel.setStyleSheet("color:rgb" + str(self.colors[self.ranColor]) + "; font-family: " + str(self.fonts[self.ranFont]) + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
 
-    def btn_click9(self):
+    def btn_click9(self):		#Sets font to random
         self.ranFont = random.randint(0,6)
         self.myLabel.setStyleSheet("color:rgb" + str(self.colors[self.ranColor]) + "; font-family: " + str(self.fonts[self.ranFont]) + "; font-size: " + str(self.fontSize) + "pt; " + "padding: " + str(self.padding) + "px;")
 
-    def btn_click10(self):
+    def btn_click10(self):		#Opens second window
         self.dialogTextBrowser.exec_()
 
-    def btn_click11(self):
+    def btn_click11(self):		#Starts music
         self.p = vlc.MediaPlayer("music")
         self.p.stop()
         self.p.play()
         self.slider.setSliderPosition(0)
 
-    def valuec(self):
+    def valuec(self):			#Dynamically changes the lyrics and timestamp based on the position of the slider
         self.slider.setMaximum(len(lyrics)-1)
         size = self.slider.value()
         #print(self.slider.sliderPosition())
